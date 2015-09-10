@@ -1,0 +1,38 @@
+#! /usr/bin/env node
+
+fs = require("fs")
+
+ejs      = require("ejs")
+
+if ( process.argv.length < 5 ) {
+  console.error('Usage: build-html context template {files}')
+  process.exit(1)
+}
+
+template = ejs.compile(fs.readFileSync(process.argv[3]).toString())
+
+process
+  .argv
+  .splice(4)
+  .map(function(path){
+    return JSON.parse(fs.readFileSync(path))
+  })
+  .map(function(json){
+    return Object
+      .keys(json)
+      .map(function(key){
+        return json[key]
+      })
+  })
+  .reduce(function(memo, arrs){
+    return memo.concat(arrs[1])
+  }, [])
+  .map(function(item){
+    return template({context: process.argv[2], item: item})
+  })
+  .map(function(html){
+    console.log(html)
+  })
+console.log(process.argv)
+
+// find {} --exec build > {name}.html \;
