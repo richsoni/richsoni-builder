@@ -19,10 +19,20 @@ Object
     return new Map().set('key', key).set('item', json[key])
   })
   .map(function(map){
-    return map.set('html', template({context: context, item: map.get('item')}))
+    return map.set(
+      'urlBase',
+      context+'/'+map.get('key')+'.html'
+    )
   })
   .map(function(map){
-    fs.writeFileSync('./dst/'+context+'/'+map.get('key')+'.html', map.get('html'))
+    return map.set('html', template({
+      context: context,
+      item: map.get('item'),
+      url:  "/static/"+map.get('urlBase')
+    }))
+  })
+  .map(function(map){
+    fs.writeFileSync('./dst/'+map.get('urlBase'), map.get('html'))
   })
 
 // find {} --exec build > {name}.html \;
