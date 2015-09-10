@@ -1,0 +1,2 @@
+#! /usr/bin/env bash
+./bin/build-html blog ./templates/basic.ejs src/songs/_data.json

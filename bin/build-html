@@ -4,35 +4,25 @@ fs = require("fs")
 
 ejs      = require("ejs")
 
-if ( process.argv.length < 5 ) {
-  console.error('Usage: build-html context template {files}')
+if ( process.argv.length !== 5 ) {
+  console.error('Usage: build-html context template src')
   process.exit(1)
 }
 
+context  = process.argv[2]
 template = ejs.compile(fs.readFileSync(process.argv[3]).toString())
 
-process
-  .argv
-  .splice(4)
-  .map(function(path){
-    return JSON.parse(fs.readFileSync(path))
+json = JSON.parse(fs.readFileSync(process.argv[4]))
+Object
+  .keys(json)
+  .map(function(key){
+    return new Map().set('key', key).set('item', json[key])
   })
-  .map(function(json){
-    return Object
-      .keys(json)
-      .map(function(key){
-        return json[key]
-      })
+  .map(function(map){
+    return map.set('html', template({context: context, item: map.get('item')}))
   })
-  .reduce(function(memo, arrs){
-    return memo.concat(arrs[1])
-  }, [])
-  .map(function(item){
-    return template({context: process.argv[2], item: item})
+  .map(function(map){
+    fs.writeFileSync('./dst/'+context+'/'+map.get('key')+'.html', map.get('html'))
   })
-  .map(function(html){
-    console.log(html)
-  })
-console.log(process.argv)
 
 // find {} --exec build > {name}.html \;
