@@ -4,5 +4,5 @@ mkdir -p dst/songs
 ./bin/build-html songs ./templates/basic.ejs dst/songs.json
 
 mkdir -p dst/posts
-./bin/build-json ../blog/*.md > dst/posts.json
+./bin/build-json ../posts/*.md > dst/posts.json
 ./bin/build-html posts ./templates/basic.ejs dst/posts.json
