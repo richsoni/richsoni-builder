@@ -1,2 +1,3 @@
 #! /usr/bin/env bash
-./bin/build-html blog ./templates/basic.ejs src/songs/_data.json
+mkdir -p ./dst/songs
+./bin/build-html songs ./templates/basic.ejs ../songs/_data.json
