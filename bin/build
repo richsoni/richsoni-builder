@@ -8,6 +8,6 @@ POSTS_PATH=`realpath ../posts`
 mkdir -p dst/posts
 ./bin/build-json $POSTS_PATH/*.md > dst/posts.json
 ./bin/build-html-collection posts ./templates/basic.ejs dst/posts.json
-ln -sfP $POSTS_PATH/images dst/posts/images
+ln -sf $POSTS_PATH/images dst/posts/images
 
 ./bin/build-html homepage ./templates/basic.ejs dst/index.html
