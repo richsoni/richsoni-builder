@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ejs": "^2.3.4"
+    "ejs": "^2.3.4",
+    "front-matter": "^1.0.0",
+    "highlight.js": "^8.8.0",
+    "remarkable": "^1.6.0"
   }
 }

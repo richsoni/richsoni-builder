@@ -1,3 +1,8 @@
 #! /usr/bin/env bash
-mkdir -p ./dst/songs
-./bin/build-html songs ./templates/basic.ejs ../songs/_data.json
+mkdir -p dst/songs
+./bin/build-json ../songs/songs/*.md > dst/songs.json
+./bin/build-html songs ./templates/basic.ejs dst/songs.json
+
+mkdir -p dst/posts
+./bin/build-json ../blog/posts/*.md > dst/posts.json
+./bin/build-html posts ./templates/basic.ejs dst/posts.json
