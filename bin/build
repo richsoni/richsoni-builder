@@ -5,11 +5,12 @@ mkdir -p dst/songs
 ./bin/build-html-collection songs ./templates/basic.ejs dst/songs.json
 
 POSTS_PATH=`realpath ../posts`
-mkdir -p dst/posts
-./bin/build-json $POSTS_PATH/*.md > dst/posts.json
-./bin/build-html-collection posts ./templates/basic.ejs dst/posts.json
-rm -rf dst/posts/images
-ln -s $POSTS_PATH/images dst/posts/images
+mkdir -p dst/blog/posts
+./bin/build-json $POSTS_PATH/posts/*.md > dst/blog/posts.json
+./bin/build-html-collection 'blog/posts' ./templates/basic.ejs dst/blog/posts.json
+./bin/build-html 'blog' ./templates/basic.ejs dst/blog/index.html
+rm -rf dst/blog/posts/images
+ln -s $POSTS_PATH/images dst/blog/posts/images
 
 ./bin/build-html homepage ./templates/basic.ejs dst/index.html
 
