@@ -3,6 +3,7 @@ SONGS_PATH=`realpath ../songs`
 mkdir -p dst/songs
 ./bin/build-json $SONGS_PATH/*.md > dst/songs.json
 ./bin/build-html-collection songs ./templates/basic.ejs dst/songs.json
+./bin/build-html 'songs' ./templates/basic.ejs dst/songs/index.html
 
 POSTS_PATH=`realpath ../posts`
 mkdir -p dst/blog/posts
