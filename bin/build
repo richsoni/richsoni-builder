@@ -1,10 +1,20 @@
 #! /usr/bin/env bash
+
+
+########################################
+# Songs
+# builds json,html collection, and index
+########################################
 SONGS_PATH=`realpath ../songs`
 mkdir -p dst/songs
 ./bin/build-json $SONGS_PATH/*.md > dst/songs/songs.json
 ./bin/build-html-collection songs ./templates/basic.ejs dst/songs/songs.json
 ./bin/build-html 'song-index' ./templates/basic.ejs dst/songs/index.html
 
+########################################
+# Posts
+# builds json,html collection, and index
+########################################
 POSTS_PATH=`realpath ../posts`
 mkdir -p dst/blog/posts
 ./bin/build-json $POSTS_PATH/posts/*.md > dst/blog/posts.json
@@ -13,6 +23,17 @@ mkdir -p dst/blog/posts
 rm -rf dst/blog/posts/images
 ln -s $POSTS_PATH/images dst/blog/posts/images
 
+########################################
+# One off pages
+########################################
 ./bin/build-html homepage ./templates/basic.ejs dst/index.html
 
+########################################
+# Static Files
+########################################
 cp -r static/* dst/
+
+########################################
+# Frontend
+########################################
+cd ../frontend && webpack
