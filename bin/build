@@ -27,6 +27,7 @@ ln -s $POSTS_PATH/images dst/blog/posts/images
 # One off pages
 ########################################
 ./bin/build-html homepage ./templates/basic.ejs dst/index.html
+# ./bin/build-html wheelofimpressions ./templates/basic.ejs dst/index.html
 
 ########################################
 # Static Files
