@@ -6,10 +6,10 @@
 # builds json,html collection, and index
 ########################################
 SONGS_PATH=`realpath ../songs`
-mkdir -p dst/songs
-./bin/build-json $SONGS_PATH/*.md > dst/songs/songs.json
-./bin/build-html-collection songs ./templates/basic.ejs dst/songs/songs.json
-./bin/build-html 'song-index' ./templates/basic.ejs dst/songs/index.html
+mkdir -p dst/music
+./bin/build-json $SONGS_PATH/*.md > dst/music/songs.json
+./bin/build-html-collection music ./templates/basic.ejs dst/music/songs.json
+./bin/build-html 'song-index' ./templates/basic.ejs dst/music/index.html
 
 ########################################
 # Posts
