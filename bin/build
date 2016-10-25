@@ -19,7 +19,7 @@ mkdir -p dst/blog/posts
 ./bin/build-html-collection 'blog/posts' ./templates/basic.ejs dst/blog/posts.json
 ./bin/build-html 'blog' ./templates/basic.ejs dst/blog/index.html
 rm -rf dst/blog/posts/images
-ln -s ../images dst/blog/posts/images
+cp -rf $POSTS_PATH/images dst/blog/posts/images
 
 ########################################
 # One off pages
